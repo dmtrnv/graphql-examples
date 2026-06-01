@@ -1,0 +1,51 @@
+type Query {
+    # Query without input
+    getFeaturedProducts: [Product!]!
+
+    # Query with input
+    getProductById(input: ProductByIdInput!): Product
+
+    # Query with input
+    searchOrders(input: OrderSearchInput!): [Order!]!
+}
+
+# =========================
+# Input Types
+# =========================
+
+input ProductByIdInput {
+    productId: ID!
+}
+
+input OrderSearchInput {
+    customerId: ID!
+    status: OrderStatus
+    limit: Int
+}
+
+# =========================
+# Return Types
+# =========================
+
+type Product {
+    id: ID!
+    name: String!
+    price: Float!
+    category: String!
+    inStock: Boolean!
+}
+
+type Order {
+    id: ID!
+    customerId: ID!
+    totalAmount: Float!
+    status: OrderStatus!
+    createdAt: String!
+}
+
+enum OrderStatus {
+    PENDING
+    SHIPPED
+    DELIVERED
+    CANCELLED
+}
